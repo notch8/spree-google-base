@@ -52,7 +52,7 @@ def _build_xml
         xml.item {
           GOOGLE_BASE_ATTR_MAP.each do |k, v|
              value = product.send(v)
-             xml.tag!(k, CGI.escapeHTML(value.to_s)) unless value.nil?
+             xml.tag!(k, value.to_s) unless value.nil?
           end
         }
       end
