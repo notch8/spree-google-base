@@ -8,9 +8,8 @@ Product.class_eval do
   end
   
   def google_base_condition  
-    condition = 'new' 
-    @product_properties = ProductProperty.find_all_by_product_id(self.id, :include => [:property])  
-    @product_properties.each do |property|  
+    condition = 'new'  
+    self.product_properties.each do |property|  
       condition = property.value if property.property.presentation == 'Condition'  
     end
     condition
@@ -46,7 +45,6 @@ Product.class_eval do
   
   def google_base_brand   
     brand = '' 
-    #@product_properties = ProductProperty.find_all_by_product_id(self.id, :include => [:property])  
     self.product_properties.each do |property|  
       brand = property.value if property.property.presentation == 'Brand'  
     end
