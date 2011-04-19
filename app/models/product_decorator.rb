@@ -1,20 +1,26 @@
 Product.class_eval do
-  scope :google_base_scope, includes(:taxons, :images)
+  scope :google_base_scope, where("show_price = true AND deleted_at IS NULL").includes(:taxons, :images)
   
   protected
   
   def google_base_description
-    self.description
+    self.description.blank? ? self.meta_description : self.description
   end
   
-  def google_base_condition
-    'new'
+  def google_base_condition  
+    condition = 'new' 
+    @product_properties = ProductProperty.find_all_by_product_id(self.id, :include => [:property])  
+    @product_properties.each do |property|  
+      condition = property.value if property.property.presentation == 'Condition'  
+    end
+    condition
   end
 
   def google_base_link
     public_dir = Spree::GoogleBase::Config[:public_domain] || ''
     [public_dir.sub(/\/$/, ''), 'products', self.permalink].join('/')
-  end
+  end 
+  
   
   def google_base_image_link
     public_dir = Spree::GoogleBase::Config[:public_domain] || ''
@@ -36,5 +42,15 @@ Product.class_eval do
       end
     end
     product_type
+  end   
+  
+  def google_base_brand   
+    brand = '' 
+    #@product_properties = ProductProperty.find_all_by_product_id(self.id, :include => [:property])  
+    self.product_properties.each do |property|  
+      brand = property.value if property.property.presentation == 'Brand'  
+    end
+    brand
   end
+    
 end
