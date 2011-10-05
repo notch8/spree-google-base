@@ -9,6 +9,11 @@ module SpreeGoogleBase
       Dir.glob(File.join(File.dirname(__FILE__), "../app/**/*_decorator*.rb")) do |c|
         Rails.env.production? ? require(c) : load(c)
       end
+      
+      Dir.glob(File.join(File.dirname(__FILE__), "../app/overrides/**/*.rb")) do |c|
+        Rails.application.config.cache_classes ? require(c) : load(c)
+      end
+      
       if Spree::Config.instance
         Taxon.has_one :taxon_map
       end
