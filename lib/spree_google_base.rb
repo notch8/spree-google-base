@@ -1,5 +1,4 @@
 require 'spree_core'
-require 'spree_google_base_hooks'
 
 module SpreeGoogleBase
   class Engine < Rails::Engine
