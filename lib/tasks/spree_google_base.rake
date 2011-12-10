@@ -3,15 +3,15 @@ require 'net/ftp'
 namespace :spree_google_base do
 
   task :generate => :environment do
-    generate_google_base_xml_to("#{RAILS_ROOT}/public/google/google_base.xml")
+    generate_google_base_xml_to("#{Rails.root}/public/google/google_base.xml")
   end
   
   task :transfer => :environment do
-    transfer_google_base_xml_from("#{RAILS_ROOT}/public/google/google_base.xml")
+    transfer_google_base_xml_from("#{Rails.root}/public/google/google_base.xml")
   end
   
   task :generate_and_transfer => :environment do
-    path = "#{RAILS_ROOT}/tmp/google_base.xml"
+    path = "#{Rails.root}/tmp/google_base.xml"
     generate_google_base_xml_to(path)
     transfer_google_base_xml_from(path)
     File.delete(path)
