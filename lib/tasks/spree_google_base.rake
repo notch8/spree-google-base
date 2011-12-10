@@ -42,7 +42,7 @@ def _filter_xml(output)
 end
   
 def _build_xml
-  returning '' do |output|
+  tap '' do |output|
     @public_dir = Spree::GoogleBase::Config[:public_domain] || ''
     xml = Builder::XmlMarkup.new(:target => output, :indent => 2, :margin => 1)
     xml.channel {
