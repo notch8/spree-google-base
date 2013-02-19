@@ -1,20 +1,38 @@
 <%= render :partial => 'spree/admin/shared/configuration_menu' %>
 
-<h1><%= t("google_base.export_settings") %></h1>
+<% content_for :page_title do %>
+  <%= t("google_base.export_settings") %>
+<% end %>
 
-<table>
-  <% [:title, :public_domain, :description, :ftp_username].each do |setting| %>
-    <%= setting_presentation_row(setting) %>
-  <% end %>
-  <%= setting_presentation_row(:ftp_password, true) %>
-  <%= setting_presentation_row(:enable_taxon_mapping) %>
-</table>
-
-<p>
-  <%= link_to_with_icon 'edit', t("edit"), edit_admin_google_base_settings_path %>
+<% content_for :page_actions do %>
+  <li id="edit_google_base_settings_link"> 
+        <%= button_link_to t("edit"), edit_admin_google_base_settings_path %>
+  </li>
   <% if Spree::GoogleBase::Config[:enable_taxon_mapping] %>
-    <%= link_to_with_icon 'edit', t("google_base.manage_taxon_mapping"), admin_taxon_map_index_path %>
+    <li id="edit_taxon_mapping"> 
+      <%= button_link_to t("google_base.manage_taxon_mapping"), admin_taxon_map_index_path %>
+     </li> 
   <% end %>
-</p>
+<% end %>
+
+<table class="index" id="admin_google_base_settings">
+  <colgroup>
+      <col style="width: 40%">
+      <col style="width: 60%">
+  </colgroup>
+  <thead>
+    <tr data-hook="admin_google_base_headers">
+      <th><%= t(:item) %></th>
+      <th><%= t(:setting) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% [:title, :public_domain, :description, :ftp_username].each do |setting| %>
+      <%= setting_presentation_row(setting) %>
+    <% end %>
+    <%= setting_presentation_row(:ftp_password, true) %>
+    <%= setting_presentation_row(:enable_taxon_mapping) %>
+</tbody>
+</table>
 
 

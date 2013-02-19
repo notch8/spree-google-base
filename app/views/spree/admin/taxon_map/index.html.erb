@@ -2,10 +2,17 @@
 <%= stylesheet_link_tag 'google_base.css' %>
 <% end -%>
 
-<div id="google_base_map">
-<h1>Google Base Taxonomy Mapping</h1>
-<a href="http://www.google.com/support/merchants/bin/answer.py?hl=en&answer=160081" target="_blank">Google Taxonomy Listings</a>
+<% content_for :page_title do %>
+  Google Base Taxonomy Mapping
+<% end %>
 
+<% content_for :page_actions do %>
+  <li id="edit_google_base_settings_link"> 
+        <%= button_link_to "Back to Google Base Settings", admin_google_base_settings_path %>
+  </li>
+<% end %>
+
+<div id="google_base_map">
 <%= form_for :taxon_maper do |f| %>
   <div class="headers">
     <label for="header">Taxon</label>
