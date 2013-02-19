@@ -15,7 +15,8 @@ module SpreeGoogleBase
         ['description', 'google_base_description'],
         ['g:price', 'price'],
         ['g:condition', 'google_base_condition'],
-        ['g:product_type', 'google_base_product_type'],
+        ['g:product_type', 'google_base_taxon_type'],
+        ['g:google_product_category', 'google_base_product_category'],
         ['g:brand', 'google_base_brand'],
         ['g:quantity','on_hand'],
         ['g:availability', 'google_base_availability']

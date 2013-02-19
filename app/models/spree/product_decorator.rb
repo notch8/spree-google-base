@@ -36,10 +36,8 @@ module Spree
       pp ? pp.value : nil
     end
 
-    def google_base_product_type
-      return google_base_taxon_type unless Spree::GoogleBase::Config[:enable_taxon_mapping]
-
-      product_type = ''
+    def google_base_product_category
+      product_type = 'Electronics > Communications > Telephony'
       priority = -1000
       self.taxons.each do |taxon|
         if taxon.taxon_map && taxon.taxon_map.priority > priority
@@ -52,8 +50,8 @@ module Spree
 
     def google_base_taxon_type
       return unless taxons.any?
-
-      taxons[0].self_and_ancestors.map(&:name).join(" > ")
+      product_type = 'Electronics > Communications > Telephony'
+      product_type =taxons[0].self_and_ancestors.map(&:name).join(" > ")
     end
 
     def google_base_price
