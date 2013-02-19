@@ -11,6 +11,12 @@ module SpreeGoogleBase
         builder.generate_and_transfer_store
       end
     end
+
+    def self.generate
+     self.builders.each do |builder|
+        builder.generate
+      end
+    end
     
     def self.builders
       if defined?(Spree::Store)
@@ -48,6 +54,14 @@ module SpreeGoogleBase
 
       transfer_xml
       cleanup_xml
+    end
+
+    def generate
+      delete_xml_if_exists
+
+      File.open(path, 'w') do |file| 
+        generate_xml file
+      end
     end
     
     def path
@@ -117,7 +131,7 @@ module SpreeGoogleBase
 
     def image_url image
       base_url = image.attachment.url(:large)
-      base_url = "#{domain}/#{base_url}" unless Spree::Config[:use_s3]
+      base_url = "#{domain}#{base_url}" unless Spree::Config[:use_s3]
 
       base_url
     end

@@ -1,6 +1,7 @@
 module Spree
   Product.class_eval do
-    scope :google_base_scope, includes(:taxons, {:master => :images})
+    # scope :google_base_scope, includes(:taxons, {:master => :images})
+    scope :google_base_scope, where("show_price = true AND deleted_at IS NULL").includes(:taxons)
     
     def google_base_description
       description
@@ -53,6 +54,10 @@ module Spree
       return unless taxons.any?
 
       taxons[0].self_and_ancestors.map(&:name).join(" > ")
+    end
+
+    def google_base_price
+      price_in(current_currency).display_price     
     end
   end
 end
