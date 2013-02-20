@@ -49,9 +49,11 @@ module Spree
     end
 
     def google_base_taxon_type
-      return unless taxons.any?
-      product_type = 'Electronics > Communications > Telephony'
-      product_type =taxons[0].self_and_ancestors.map(&:name).join(" > ")
+      product_type = if taxons.any?
+         taxons[0].self_and_ancestors.map(&:name).join(" > ")
+        else
+         'Electronics > Communications > Telephony'
+        end
     end
 
     def google_base_price
