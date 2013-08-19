@@ -9,4 +9,4 @@ end
 
 gemspec
 gem 'spree', github: 'spree/spree', branch: 'master'
-gem 'spree_multi_domain', github: 'spree/spree-multi-domain.git'
+gem 'spree_multi_domain', github: 'spree/spree-multi-domain', branch: 'master'
