@@ -3,6 +3,10 @@ module Spree
     # scope :google_base_scope, includes(:taxons, {:master => :images})
     scope :google_base_scope, where("show_price = true AND deleted_at IS NULL").includes(:taxons)
     
+    def google_base_title
+      name.truncate(70)
+    end
+
     def google_base_description
       description
     end
