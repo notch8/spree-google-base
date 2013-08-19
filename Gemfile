@@ -8,5 +8,5 @@ else
 end
 
 gemspec
-gem 'spree', github: 'spree/spree'
-gem 'spree_multi_domain', :git => 'git://github.com/spree/spree-multi-domain.git'
+gem 'spree', github: 'spree/spree', branch: 'master'
+gem 'spree_multi_domain', github: 'spree/spree-multi-domain.git'
