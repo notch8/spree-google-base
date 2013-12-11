@@ -14,6 +14,7 @@ module SpreeGoogleBase
         ['title', 'google_base_title'],
         ['description', 'google_base_description'],
         ['g:price', 'price'],
+        ['g:shipping_weight', 'weight'],
         ['g:condition', 'google_base_condition'],
         ['g:shipping_weight', 'weight'],
         ['g:product_type', 'google_base_taxon_type'],
@@ -31,5 +32,6 @@ module SpreeGoogleBase
     end
 
     config.to_prepare &method(:activate).to_proc
+
   end
 end
