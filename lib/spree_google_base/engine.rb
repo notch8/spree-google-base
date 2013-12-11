@@ -6,7 +6,7 @@ module SpreeGoogleBase
 
     initializer "spree.google_base.environment", :before => :load_config_initializers do |app|
       Spree::GoogleBase::Config = Spree::GoogleBaseConfiguration.new
-      
+
       # See http://support.google.com/merchants/bin/answer.py?hl=en&answer=188494#US for all other fields
       SpreeGoogleBase::FeedBuilder::GOOGLE_BASE_ATTR_MAP = [
         ['g:id', 'id'],
@@ -15,6 +15,7 @@ module SpreeGoogleBase
         ['description', 'google_base_description'],
         ['g:price', 'price'],
         ['g:condition', 'google_base_condition'],
+        ['g:shipping_weight', 'weight'],
         ['g:product_type', 'google_base_taxon_type'],
         ['g:google_product_category', 'google_base_product_category'],
         ['g:brand', 'google_base_brand'],
@@ -30,6 +31,5 @@ module SpreeGoogleBase
     end
 
     config.to_prepare &method(:activate).to_proc
-    
   end
 end

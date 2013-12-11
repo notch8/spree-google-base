@@ -1,8 +1,8 @@
 module Spree
   Product.class_eval do
     # scope :google_base_scope, includes(:taxons, {:master => :images})
-    scope :google_base_scope, where("show_price = true AND deleted_at IS NULL").includes(:taxons)
-    
+    scope :google_base_scope, where("total_on_hand != 0 AND show_price = true AND deleted_at IS NULL").includes(:taxons)
+
     def google_base_title
       name.truncate(70)
     end
@@ -10,11 +10,11 @@ module Spree
     def google_base_description
       description
     end
-    
+
     def google_base_condition
       'new'
     end
-    
+
     def google_base_availability
       'in stock'
     end
@@ -30,7 +30,7 @@ module Spree
       # app/models/spree/product_decorator.rb
       #
       pp = Spree::ProductProperty.first(
-        :joins => :property, 
+        :joins => :property,
         :conditions => {
           :product_id => self.id,
           :spree_properties => {:name => 'brand'}
@@ -61,7 +61,7 @@ module Spree
     end
 
     def google_base_price
-      price_in(current_currency).display_price     
+      price_in(current_currency).display_price
     end
   end
 end
