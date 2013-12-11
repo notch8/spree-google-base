@@ -1,7 +1,7 @@
 module Spree
   Product.class_eval do
     # scope :google_base_scope, includes(:taxons, {:master => :images})
-    scope :google_base_scope, where("total_on_hand != 0 AND show_price = true AND deleted_at IS NULL").includes(:taxons)
+    scope :google_base_scope, where("show_price = true AND deleted_at IS NULL").includes(:taxons)
 
     def google_base_title
       name.truncate(70)
