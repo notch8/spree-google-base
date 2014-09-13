@@ -1,7 +1,6 @@
 module Spree
   Product.class_eval do
-    # scope :google_base_scope, includes(:taxons, {:master => :images})
-    scope :google_base_scope, where("show_price = true AND deleted_at IS NULL").includes(:taxons)
+    scope :google_base_scope, -> { where(show_price: true).active.includes(:taxons) }
 
     def google_base_title
       name.truncate(70)
@@ -26,17 +25,7 @@ module Spree
     end
 
     def google_base_brand
-      # Taken from github.com/romul/spree-solr-search
-      # app/models/spree/product_decorator.rb
-      #
-      pp = Spree::ProductProperty.first(
-        :joins => :property,
-        :conditions => {
-          :product_id => self.id,
-          :spree_properties => {:name => 'brand'}
-        }
-      )
-
+      pp = Spree::ProductProperty.joins(:property).where('product_id' => self.id, 'spree_properties.name' => 'brand').first
       pp ? pp.value : nil
     end
 
