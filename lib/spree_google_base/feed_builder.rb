@@ -70,7 +70,8 @@ module SpreeGoogleBase
     end
 
     def filename
-      "google_base#{@store.try(:code)}.xml"
+      #"google_base#{@store.try(:code)}.xml"
+      "google_base.xml"
     end
 
     def delete_xml_if_exists
