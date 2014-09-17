@@ -39,7 +39,8 @@ module SpreeGoogleBase
 
     def ar_scope
       if @store
-        Spree::Product.by_store(@store).google_base_scope
+        #Spree::Product.by_store(@store).google_base_scope
+        Spree::Product.google_base_scope
       else
         Spree::Product.google_base_scope
       end
