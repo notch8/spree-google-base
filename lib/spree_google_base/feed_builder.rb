@@ -133,8 +133,7 @@ module SpreeGoogleBase
 
     def image_url image
       base_url = image.attachment.url(:large)
-      base_url = "#{domain}#{base_url}"
-
+      #base_url = "#{domain}#{base_url}"
       base_url
     end
 
