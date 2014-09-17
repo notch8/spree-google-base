@@ -33,7 +33,7 @@ module SpreeGoogleBase
       @store = opts[:store] if opts[:store].present?
       @title = @store ? @store.name : Spree::GoogleBase::Config[:store_name]
 
-      @domain = @store ? @store.domains.match(/[\w\.]+/).to_s : opts[:path]
+      #@domain = @store ? @store.url.match(/[\w\.]+/).to_s : opts[:path]
       @domain ||= Spree::GoogleBase::Config[:public_domain]
     end
 
